@@ -6,11 +6,11 @@
 
 body {
     font-family: 'Yusei Magic', sans-serif!important;
+    background-color: #222831;
 }
 
 .popup_content {
     width: 250px; 
-    background-color: #000;
 }
 
 .center {
