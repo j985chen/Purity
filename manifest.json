@@ -1,6 +1,7 @@
 {
     "name": "Childproof Extension",
     "version": "1.0",
+    "icons": {}, 
     "description": "An extension which allows parents to create a safer internet for their children",
     "background": {
         "scripts": [],
