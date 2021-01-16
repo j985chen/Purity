@@ -32,7 +32,6 @@ console.log("UnseeIt V1.0 Ready");
 // wordDates = [{date: "09/30/2018", wordHist:[{count: 1, word: "fuck"}]}];
 // chrome.storage.local.set({wordDates},function(){});
 
-
 function retrieveSettings(xpathDocText,node){
 	chrome.storage.local.get(settings,function(settings){
 		chrome.storage.local.get(['defaultWords'],function(result){
