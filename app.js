@@ -75,9 +75,9 @@ passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "http://childproof.herokuapp.com",
-    userProfileURL: "http://childproof.herokuapp.com",
+    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
   },
-  function(accessToken, refsreshToken, profile, done) {
+  function(accessToken, refreshToken, profile, done) {
     User.findOrCreate({
       googleId: profile.id,
       username: profile.emails[0].value
