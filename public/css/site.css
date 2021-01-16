@@ -15,7 +15,7 @@ p, li, textarea, button, label {
 
 h2 {
     font-size: 1.17em!important;
-    color: #f1976a;
+    color: #cbbcb1;
 }
 
 body {
@@ -72,7 +72,7 @@ body:not(.ready) #controls {
 }
 
 h1 {
-    color: #cdd0cb;
+    color: #cbbcb1;
     padding: 10px;
     font-size: 40px;
     float: center;
@@ -140,12 +140,10 @@ input[type="text"] {
     font-size: 20px;
     font-weight: 200;
     width: 100%;
-    box-shadow: inset 0 -3px 0 0 #cdd0cb;
 }
 
 input[type="text"]:focus {
     outline: none;
-    box-shadow: inset 0 -3px 0 0 #e8eae6;
 }
 
 ::placeholder {
