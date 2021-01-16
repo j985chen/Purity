@@ -31,13 +31,19 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb+srv:admin-Ke:password123!@cluster0.qi4ub.mongodb.net/childproof-extension", {
+mongoose.connect("mongodb+srv://admin-Ke:password123!@cluster0.qi4ub.mongodb.net/Users?retryWrites=true&w=majority", {
     useNewUrlParser: true
 }, {
     useUnifiedTopology: true
 });
 mongoose.set('useUnifiedTopology', true);
 mongoose.set("useCreateIndex", true);
+
+mongoose.connection
+    .once('open', ()=> console.log('Connected'))
+    .on('error', (error)=> {
+        console.log("Your Error: ", error);
+    });
 
 // create user schema
 const userSchema = new mongoose.Schema({
@@ -49,6 +55,20 @@ const userSchema = new mongoose.Schema({
 
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
+
+const User = new mongoose.model("User", userSchema);
+
+passport.use(User.createStrategy());
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+        done(err, user);
+    });
+});
 
 // homepage
 app.get("/", function(req, res) {
@@ -87,8 +107,16 @@ app.get("/auth/google/childproof",
         failureRedirect: "/"
     }),
     function(req, res) {
-        res.redirect("/:userId");
+        res.redirect("/");
     });
+
+//
+app.route("/user/:userId")
+   .get(function(req, res) {
+     user.findOne({username: req.params.userID}, function(err, foundUser) {
+       res.sendFile(__dirname + "/site.html");
+     })
+   })
 
 // connects to webpage
 app.listen(process.env.PORT || 3000, function() {
