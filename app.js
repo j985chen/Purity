@@ -74,7 +74,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://childproof.herokuapp.com",
+    callbackURL: "http://childproof.herokuapp.com/auth/google/childproof",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
   },
   function(accessToken, refreshToken, profile, done) {
