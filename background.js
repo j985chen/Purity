@@ -229,7 +229,40 @@ chrome.runtime.onInstalled.addListener(function(details){
 			{"substitute": "[turd]","word": "shit","double":false},
 			{"substitute": "[crap]","word": "shite","double":false},
 			{"substitute": "[crap]","word": "thefuck","double":false},
-			{"substitute": "[pathetic]","word": "whore","double":false}
+            {"substitute": "[pathetic]","word": "whore","double":false},
+            {"substitute": "[votes]","word": "ballots","double":false},
+            {"substitute": "[vote]","word": "ballot","double":false},
+            {"substitute": "[discord]","word": "disagreement","double":false},
+            {"substitute": "[statehouses]","word": "government buildings","double":false}, 
+            {"substitute": "[more]","word": "additional","double":false},
+            {"substitute": "[getting ready for]","word": "Bracing","double":false},
+            {"substitute": "[fight]","word": "confrontation","double":false},
+            {"substitute": "[fights]","word": "confrontations","double":false}, 
+            {"substitute": "[disagree with]","word": "object to","double":false},
+            {"substitute": "[disagree]","word": "object","double":false},
+            {"substitute": "[votes]","word": "ballots","double":false},
+            {"substitute": "[maintaining]","word": "perpetuating","double":false},
+            {"substitute": "[maintain]","word": "perpetuate","double":false},
+            {"substitute": "[quality]","word": "integrity","double":false},
+            {"substitute": "[police]","word": "law enforcement","double":false},
+            {"substitute": "[maintaining]","word": "perpetuating","double":false},
+            {"substitute": "[getting ready]","word": "gearing up","double":false},
+            {"substitute": "[maintaining]","word": "perpetuating","double":false},
+            {"substitute": "[country]","word": "nation","double":false},
+            {"substitute": "[terrorists]","word": "domestic extremists","double":false},
+            {"substitute": "[before]","word": "prior to","double":false},
+            {"substitute": "[maintaining]","word": "perpetuating","double":false},
+            {"substitute": "[change]","word": "amend","double":false},
+            {"substitute": "[government]","word": "federal","double":false},
+            {"substitute": "[wrong]","word": "reprehensible","double":false},
+            {"substitute": "[a lot]","word": "numerous","double":false},
+            {"substitute": "[gotten]","word": "received","double":false},
+            {"substitute": "[get]","word": "receive","double":false},
+            {"substitute": "[confirm]","word": "legitimize","double":false},
+            {"substitute": "[wrong]","word": "unsupported","double":false},
+            {"substitute": "[went to]","word": "attended","double":false},
+            {"substitute": "[lies]","word": "falsehoods","double":false},
+            {"substitute": "[lie]","word": "falsehood","double":false},
 		],
 		textHistory: [],
 		wordDates:[{date: currentDate, wordHist: []}]	
@@ -237,10 +270,22 @@ chrome.runtime.onInstalled.addListener(function(details){
 
     if(details.reason == "install"){
        chrome.storage.local.set(defaultSettings, function() {
-      	alert("Extension successfully installed");
+      	alert("Chrome Extension successfully installed");
     });
     }
 });
+
+//add list of blacklist websites
+const defaultFilters = [
+	"*://*.pornhub.com/*",
+]
+
+//website blocker function
+chrome.webRequest.onBeforeRequest.addListener(
+	function(details){return{ cancel: true}},
+	{urls: defaultFilters},
+	["blocking"]
+)
 
 // chrome.webRequest.onCompleted.addListener(function(details) {
 //     var url = document.createElement('a');
@@ -251,35 +296,39 @@ chrome.runtime.onInstalled.addListener(function(details){
 //     }
 // }, {urls : ["*://*.facebook.com/*"]});
 
+
+
+//-------- background for website blocking ----------
+
 "use strict";
 
 /* global chrome, URL */
 
-chrome.runtime.onInstalled.addListener(function () {
-    /* upon installation */
-  chrome.storage.local.get(["blocked", "enabled"], function (local) {
-    if (!Array.isArray(local.blocked)) {
-      chrome.storage.local.set({ blocked: [] });
+chrome.runtime.onInstalled.addListener(function () { //Fired when the extension is first installed, when the extension is updated to a new version, and when Chrome is updated to a new version.
+    
+  chrome.storage.local.get(["blocked", "enabled"], function (local) { //get blocked and enabled from local storage
+    if (!Array.isArray(local.blocked)) { //if passed value (local.blocked)is not array
+      chrome.storage.local.set({ blocked: [] });//make blocked into array 
     }
 
-    if (typeof local.enabled !== "boolean") {
-      chrome.storage.local.set({ enabled: false });
+    if (typeof local.enabled !== "boolean") { //if enabled is not a boolean
+      chrome.storage.local.set({ enabled: false }); //make enabled a boolean and set value to false
     }
   });
 });
 
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
-  const url = changeInfo.pendingUrl || changeInfo.url;
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) { //fired when tab is updated 
+  const url = changeInfo.pendingUrl || changeInfo.url; 
   if (!url || !url.startsWith("http")) {
     return;
-  }
-
+  } 
+ 
   const hostname = new URL(url).hostname;
 
   chrome.storage.local.get(["blocked", "enabled"], function (local) {
     const { blocked, enabled } = local;
-    if (Array.isArray(blocked) && enabled && blocked.find(domain => hostname.includes(domain))) {
-      chrome.tabs.remove(tabId);
+    if (Array.isArray(blocked) && enabled && blocked.find(domain => hostname.includes(domain))) { //if blocked is array, if enabled, and if domain name is in the list of blocked
+      chrome.tabs.remove(tabId); //close that tab
     }
   });
 });

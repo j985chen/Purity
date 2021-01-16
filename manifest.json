@@ -10,9 +10,24 @@
     "description": "An extension which allows parents to create a safer internet for their children",
     "background": {
         "scripts": ["background.js"],
-        "persistent": false
+        "persistent": true
     },
-    "permissions": ["storage", "history", "activeTab", "tabs"],
+    "content_scripts":[
+        {
+            "matches":["<all_urls>"],
+            "js": ["content.js"],
+            "run_at": "document_end",
+            "all_frames": true
+        }
+    ],
+    "permissions": [
+        "storage", 
+        "history", 
+        "activeTab", 
+        "tabs", 
+        "webRequest", 
+        "webRequestBlocking", 
+        "<all_urls>"],
     "incognito": "not_allowed",
     "browser_action": {
         "default_popup": "popup.html",

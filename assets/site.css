@@ -37,7 +37,6 @@ body:not(.ready) #controls {
 #textarea {
   border: 3px solid;
   outline: none;
-  /*font-size: inherit;*/
   line-height: inherit;
   background-color: #FFFFE0;
 }
@@ -55,7 +54,6 @@ body:not(.ready) #controls {
 }
 
 #save {
-  /*font-size: 150%;*/
   font-weight: bold;
   margin-right: 50px;
   background-color: pink!important;
@@ -95,10 +93,6 @@ h1 {
     border-color: white;
     border-radius: 5px;
     box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
-}
-
-#heading {
-    text-align: center;
 }
 
 .item {
