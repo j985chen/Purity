@@ -126,7 +126,7 @@ passport.use(new FacebookStrategy({
       if (err) {
         return done(err);
       }
-      done(null, user);
+      return done(null, user);
     });
   }
 ));
