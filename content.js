@@ -21,10 +21,6 @@ var textHistory = [];
 var wordDates = [];
 var origin_site;
 
-
-const vision = require('@google-cloud/vision');
-const client = new vision.ImageAnnotatorClient();
-
 var innerBody = document.querySelectorAll('*');
 
 console.log("UnseeIt V1.0 Ready");
