@@ -3,15 +3,20 @@
 <head>
 <title>BLACKLIST</title>
 <style>
+
+  @font-face {
+      font-family: 'Yusei Magic', sans-serif;;
+      src: url(https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap);
+  }
   html {
     font-size: 26px;
   }
   body {
     margin: 0 auto;
     padding: 50px;
-    font-family: Calibri, 'Courier New', monospace;
+    font-family: 'Yusei Magic', sans-serif;
     line-height: 150%;
-    background-color: #FFFFE0;
+    background-color: #222831;
     text-align: center;
   }
   body:not(.ready) #textarea::placeholder,
@@ -26,15 +31,19 @@
     outline: none;
     font-size: inherit;
     line-height: inherit;
+    background-color: #FFFFE0;
   }
   #textarea::placeholder {
     color: silver;
     opacity: 1;
     transition: opacity .7s;
   }
-  #controls {
+  
+ #controls {
     transition: opacity 1s;
   }
+  
+  
   #save {
     font-size: 150%;
     font-weight: bold;
@@ -53,9 +62,9 @@
   }
 </style>
 </head>
-<body>
+<body style="color: white;">
 
-<h1 style="background-color: pink; color: hotpink; text-align: center;">Block Site</h1>
+<h1 style="background-color: pink; color: black; text-align: center;">Block Site</h1>
 <p>
   Use our <strong>Blacklist</strong> feature to block certain websites from your child!
 </p>
