@@ -296,35 +296,39 @@ chrome.webRequest.onBeforeRequest.addListener(
 //     }
 // }, {urls : ["*://*.facebook.com/*"]});
 
+
+
+//-------- background for website blocking ----------
+
 "use strict";
 
 /* global chrome, URL */
 
-chrome.runtime.onInstalled.addListener(function () {
-    /* upon installation */
-  chrome.storage.local.get(["blocked", "enabled"], function (local) {
-    if (!Array.isArray(local.blocked)) {
-      chrome.storage.local.set({ blocked: [] });
+chrome.runtime.onInstalled.addListener(function () { //Fired when the extension is first installed, when the extension is updated to a new version, and when Chrome is updated to a new version.
+    
+  chrome.storage.local.get(["blocked", "enabled"], function (local) { //get blocked and enabled from local storage
+    if (!Array.isArray(local.blocked)) { //if passed value (local.blocked)is not array
+      chrome.storage.local.set({ blocked: [] });//make blocked into array 
     }
 
-    if (typeof local.enabled !== "boolean") {
-      chrome.storage.local.set({ enabled: false });
+    if (typeof local.enabled !== "boolean") { //if enabled is not a boolean
+      chrome.storage.local.set({ enabled: false }); //make enabled a boolean and set value to false
     }
   });
 });
 
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
-  const url = changeInfo.pendingUrl || changeInfo.url;
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) { //fired when tab is updated 
+  const url = changeInfo.pendingUrl || changeInfo.url; 
   if (!url || !url.startsWith("http")) {
     return;
-  }
-
+  } 
+ 
   const hostname = new URL(url).hostname;
 
   chrome.storage.local.get(["blocked", "enabled"], function (local) {
     const { blocked, enabled } = local;
-    if (Array.isArray(blocked) && enabled && blocked.find(domain => hostname.includes(domain))) {
-      chrome.tabs.remove(tabId);
+    if (Array.isArray(blocked) && enabled && blocked.find(domain => hostname.includes(domain))) { //if blocked is array, if enabled, and if domain name is in the list of blocked
+      chrome.tabs.remove(tabId); //close that tab
     }
   });
 });
