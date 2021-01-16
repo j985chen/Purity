@@ -116,7 +116,8 @@ app.get("/auth/google/childproof",
 passport.use(new FacebookStrategy({
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL: "http://www.childproof.herokuapp.com/auth/facebook/childproof"
+        callbackURL: "http://www.childproof.herokuapp.com/auth/facebook/childproof",
+        profileFields: ['id', 'displayName', 'photos', 'email']
       },
       function(accessToken, refreshToken, profile, done) {
         User.findOrCreate({
@@ -130,8 +131,9 @@ passport.use(new FacebookStrategy({
       ));
 
     app.get('/auth/facebook', passport.authenticate('facebook', {
-      scope: 'read_stream'
-    }));
+      scope: ["read_stream", "profile"]
+    })
+  );
 
     app.get('/auth/facebook/childproof',
       passport.authenticate('facebook', {
