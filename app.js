@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: require('find-config')('.env') });
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
@@ -73,8 +73,8 @@ passport.deserializeUser(function(id, done) {
 
 // Google oauth
 passport.use(new GoogleStrategy({
-    clientID: "1088629667656-cpffffoeck6elpa5dl9h21lvq2iurl96.apps.googleusercontent.com",
-    clientSecret: "t79zAaCQZ2t6TuwtaPzOdA87",
+   clientID: process.env.GOOGLE_CLIENT_ID,
+   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "http://childproof.herokuapp.com/auth/google/childproof",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
