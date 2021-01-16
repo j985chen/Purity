@@ -1,4 +1,13 @@
 /* css for pop-up */
+@font-face {
+    font-family: 'Yusei Magic', sans-serif;;
+    src: url(https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap);
+}
+
+body {
+    font-family: 'Yusei Magic', sans-serif!important;
+}
+
 .popup_content {
     width: 250px; 
     background-color: #000;
@@ -9,11 +18,12 @@
     margin: auto;
 }
 
-.popup_button {
+#popup_button {
     border-radius: 5px;
     border: 0px;
     color: #FFF;
     background-color: #ED1C24;
     padding: 10px 5px; 
     margin-top: 10px;
+    font-family: inherit !important;
 }
