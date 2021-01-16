@@ -14,7 +14,8 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
-app.use(express.static("Public"));
+app.use(express.static("public"));
+app.use(express.static("assets"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -75,7 +76,7 @@ passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "http://childproof.herokuapp.com/auth/google/childproof",
-    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
+    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, done) {
     User.findOrCreate({
