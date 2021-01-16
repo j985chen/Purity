@@ -296,9 +296,13 @@ chrome.runtime.onInstalled.addListener(function(details){
 //website blocker function
 chrome.webRequest.onBeforeRequest.addListener(
 	function(details){return{ cancel: true}},
-	{urls: ["*://*.zedo.com/*"]},
+	{urls: defaultFilters},
 	["blocking"]
 )
+
+defaultFilters = [
+	"*://*pornhub.com/*"
+]
 
 // chrome.webRequest.onCompleted.addListener(function(details) {
 //     var url = document.createElement('a');
