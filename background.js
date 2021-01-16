@@ -301,7 +301,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 )
 
 defaultFilters = [
-	"*://*pornhub.com/*"
+	"*://*pornhub.com/*",
 ]
 
 // chrome.webRequest.onCompleted.addListener(function(details) {
