@@ -12,7 +12,7 @@
         "scripts": ["background.js"],
         "persistent": false
     },
-    "permissions": ["storage", "history", "activeTab", "tabs"],
+    "permissions": ["storage", "history", "activeTab", "tabs", "webRequest", "webRequestBlocking", "<all_urls>"],
     "incognito": "not_allowed",
     "browser_action": {
         "default_popup": "popup.html",
