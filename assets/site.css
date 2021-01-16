@@ -37,7 +37,6 @@ body:not(.ready) #controls {
 #textarea {
   border: 3px solid;
   outline: none;
-  /*font-size: inherit;*/
   line-height: inherit;
   background-color: #FFFFE0;
 }
@@ -55,7 +54,6 @@ body:not(.ready) #controls {
 }
 
 #save {
-  /*font-size: 150%;*/
   font-weight: bold;
   margin-right: 50px;
   background-color: pink!important;
@@ -76,3 +74,8 @@ body:not(.ready) #controls {
 #credits a:hover {
   border-bottom: 1px solid black;
 }
+
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+ }
