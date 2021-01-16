@@ -1,0 +1,27 @@
+{
+  "name": "childproof-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kexu02/Childproof-extension.git"
+  },
+  "keywords": [
+    "childproof",
+    "extension"
+  ],
+  "author": "Ke Emma Iva Janet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kexu02/Childproof-extension/issues"
+  },
+  "homepage": "https://github.com/kexu02/Childproof-extension#readme",
+  "dependencies": {
+    "sequelize": "^6.3.5",
+    "sequelize-cockroachdb": "^1.1.0"
+  }
+}
