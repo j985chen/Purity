@@ -31,11 +31,17 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb+srv:admin-Ke:password123!@cluster0.qi4ub.mongodb.net/childproof-extension", {
+mongoose.connect("mongodb+srv://admin-Ke:password123!@cluster0.qi4ub.mongodb.net/Users?retryWrites=true&w=majority", {
     useNewUrlParser: true
 }, {
     useUnifiedTopology: true
 });
+
+mongoose.connection
+    .once('open', ()=> console.log('Connected'))
+    .on('error', (error)=> {
+        console.log("Your Error: ", error);
+    });
 mongoose.set('useUnifiedTopology', true);
 mongoose.set("useCreateIndex", true);
 
