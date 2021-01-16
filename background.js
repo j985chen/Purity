@@ -263,24 +263,6 @@ chrome.runtime.onInstalled.addListener(function(details){
             {"substitute": "[went to]","word": "attended","double":false},
             {"substitute": "[lies]","word": "falsehoods","double":false},
             {"substitute": "[lie]","word": "falsehood","double":false},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		],
 		textHistory: [],
 		wordDates:[{date: currentDate, wordHist: []}]	
@@ -293,6 +275,7 @@ chrome.runtime.onInstalled.addListener(function(details){
     }
 });
 
+//add list of blacklist websites
 const defaultFilters = [
 	"*://*.pornhub.com/*",
 ]
