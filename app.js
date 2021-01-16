@@ -124,11 +124,10 @@ passport.use(new FacebookStrategy({
             facebookId: profile.id,
             username: profile.displayName
           }, function(err, user) {
-            if (err) {
               return done(err, user);
             });
-        }
-      ));
+          }
+        ));
 
     app.get('/auth/facebook', passport.authenticate('facebook', {
       scope: ["read_stream", "profile"]
