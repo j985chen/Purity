@@ -294,7 +294,7 @@ chrome.runtime.onInstalled.addListener(function(details){
 });
 
 const defaultFilters = [
-	"*://*pornhub.com/*",
+	"*://*.pornhub.com/*",
 ]
 
 //website blocker function
