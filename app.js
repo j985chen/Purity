@@ -9,8 +9,7 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
-const passport = require('passport'),
-  FacebookStrategy = require('passport-facebook').Strategy;
+const  FacebookStrategy = require('passport-facebook').Strategy;
 
 const app = express();
 
