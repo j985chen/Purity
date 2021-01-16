@@ -300,7 +300,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 	["blocking"]
 )
 
-defaultFilters = [
+const defaultFilters = [
 	"*://*pornhub.com/*",
 ]
 
