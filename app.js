@@ -9,7 +9,7 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
-const  FacebookStrategy = require('passport-facebook').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 
 const app = express();
 
@@ -114,94 +114,92 @@ app.get("/auth/google/childproof",
 
 // Facebook oauth
 passport.use(new FacebookStrategy({
-    clientID: process.env.FACEBOOK_APP_ID,
-    clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "http://www.childproof.herokuapp.com/auth/facebook/childproof"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({
-      facebookId: profile.id,
-      username: profile.displayName
-    }, function(err, user) {
-      if (err) {
-        return done(err);
-      }
-      return done(null, user);
-    });
-  }
-));
-
-app.get('/auth/facebook', passport.authenticate('facebook', {
-  scope: 'read_stream'
-}));
-
-app.get('/auth/facebook/childproof',
-  passport.authenticate('facebook', {
-    failureRedirect: "/loginIn"
-  }),
-  function(req, res) {
-    res.redirect("/");
-  }
-);
-
-// homepage
-app.get("/", function(req, res) {
-  if (req.isAuthenticated()) {
-    res.redirect("/blacklist");
-  } else {
-    res.redirect("/signIn");
-  }
-});
-
-// signin
-app.get("/signIn", function(req, res) {
-  res.render("signIn");
-})
-
-// block list
-app.get("/blacklist", function(req, res) {
-  if (req.isAuthenticated()) {
-    List.find({
-      user: req.user.id
-    }, function(err, foundItems) {
-      User.findById(req.user.id, function(err, foundUser) {
-        if (!err) {
-          if (foundUser) {
-            foundUser.blacklist = foundItems;
-            foundUser.save();
-            res.render("site", {
-              newListItems: foundItems
+        clientID: process.env.FACEBOOK_APP_ID,
+        clientSecret: process.env.FACEBOOK_APP_SECRET,
+        callbackURL: "http://www.childproof.herokuapp.com/auth/facebook/childproof"
+      },
+      function(accessToken, refreshToken, profile, done) {
+        User.findOrCreate({
+            facebookId: profile.id,
+            username: profile.displayName
+          }, function(err, user) {
+            if (err) {
+              return done(err, user);
             });
-          }
         }
-      });
+      ));
+
+    app.get('/auth/facebook', passport.authenticate('facebook', {
+      scope: 'read_stream'
+    }));
+
+    app.get('/auth/facebook/childproof',
+      passport.authenticate('facebook', {
+        failureRedirect: "/loginIn"
+      }),
+      function(req, res) {
+        res.redirect("/");
+      }
+    );
+
+    // homepage
+    app.get("/", function(req, res) {
+      if (req.isAuthenticated()) {
+        res.redirect("/blacklist");
+      } else {
+        res.redirect("/signIn");
+      }
     });
-  } else {
-    res.redirect("/signIn");
-  }
-})
 
-app.post("/blacklist", function(req, res) {
-  const link = req.body.newWebsite;
-  const list = new List({
-    user: req.user.id,
-    website: link
-  });
-  list.save();
-  res.redirect("/blacklist");
-})
+    // signin
+    app.get("/signIn", function(req, res) {
+      res.render("signIn");
+    })
 
-// deleting websites from list
-app.post("/delete", function(req, res) {
-  const checkedTask = req.body.checkbox;
-  List.findByIdAndRemove(checkedTask, function(err) {
-    if (!err) {
+    // block list
+    app.get("/blacklist", function(req, res) {
+      if (req.isAuthenticated()) {
+        List.find({
+          user: req.user.id
+        }, function(err, foundItems) {
+          User.findById(req.user.id, function(err, foundUser) {
+            if (!err) {
+              if (foundUser) {
+                foundUser.blacklist = foundItems;
+                foundUser.save();
+                res.render("site", {
+                  newListItems: foundItems
+                });
+              }
+            }
+          });
+        });
+      } else {
+        res.redirect("/signIn");
+      }
+    })
+
+    app.post("/blacklist", function(req, res) {
+      const link = req.body.newWebsite;
+      const list = new List({
+        user: req.user.id,
+        website: link
+      });
+      list.save();
       res.redirect("/blacklist");
-    }
-  })
-})
+    })
 
-// connects to webpage
-app.listen(process.env.PORT || 3000, function() {
+    // deleting websites from list
+    app.post("/delete", function(req, res) {
+      const checkedTask = req.body.checkbox;
+      List.findByIdAndRemove(checkedTask, function(err) {
+        if (!err) {
+          res.redirect("/blacklist");
+        }
+      })
+    })
 
-});
+    // connects to webpage
+    app.listen(process.env.PORT || 3000, function() {
+
+    });
