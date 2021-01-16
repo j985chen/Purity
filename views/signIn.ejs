@@ -42,7 +42,7 @@
     function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
       console.log(response);                   // The current login status of the person.
       if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-        testAPI();  
+        testAPI();
       }
     }
 
@@ -59,8 +59,8 @@
         xfbml      : true,
         version    : 'v9.0'
       });
-        
-      FB.AppEvents.logPageView();   
+
+      FB.AppEvents.logPageView();
       FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
         statusChangeCallback(response);        // Returns the login status.
       });
@@ -82,6 +82,7 @@
     <div id="fb-root"></div>
   </script>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&autoLogAppEvents=1&version=v9.0&appId=2820593898267084" nonce="cNdsGud7"></script>
+
   <main class="form-signin">
     <form action="/signIn" method="post">
       <h1 class="h3 mb-3 fw-normal text">Welcome!</h1>
