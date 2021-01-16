@@ -38,12 +38,12 @@
     opacity: 1;
     transition: opacity .7s;
   }
-  
+
  #controls {
     transition: opacity 1s;
   }
-  
-  
+
+
   #save {
     font-size: 150%;
     font-weight: bold;
@@ -64,27 +64,30 @@
 </head>
 <body style="color: white;">
 
-<h1 style="background-color: pink; color: black; text-align: center;">Block Site</h1>
-<p>
-  Use our <strong>Blacklist</strong> feature to block certain websites from your child!
-</p>
-<p>
-    <h2>Instructions:</h2>
-    1. Type in URL of website you would like to block access to <br> 
-    2. If there are multiple websites you would like to block access to, hit "enter" and type URL into new row <br>
-    3. Hit "Save" button <br>
-    4. Check "Enabled?" checkbox to enable website-blocking
-</p><div style="text-align: center;">
-<textarea id="textarea" rows="12" cols="23" spellcheck="false" ></textarea>
-</div>
-<br>
+  <form action="/" method="post">
+    <h1 style="background-color: pink; color: black; text-align: center;">Block Site</h1>
+    <p>
+      Use our <strong>Blacklist</strong> feature to block certain websites from your child!
+    </p>
+    <p>
+        <h2>Instructions:</h2>
+        1. Type in URL of website you would like to block access to <br>
+        2. If there are multiple websites you would like to block access to, hit "enter" and type URL into new row <br>
+        3. Hit "Save" button <br>
+        4. Check "Enabled?" checkbox to enable website-blocking
+    </p><div style="text-align: center;">
+    <textarea id="textarea" rows="12" cols="23" spellcheck="false" ></textarea>
+    </div>
+    <br>
 
-<div id="controls">
-  <button id="save">Save</button>
-  <strong>Enabled?</strong><input id="checkbox" type="checkbox" checked="checked">
-</div>
+    <div id="controls">
+      <button id="save">Save</button>
+      <strong>Enabled?</strong><input id="checkbox" type="checkbox" checked="checked">
+    </div>
 
 
-<script src="site.js"></script>
+    <script src="site.js"></script>
+  </form>
+
 </body>
 </html>

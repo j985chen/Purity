@@ -79,8 +79,9 @@ passport.deserializeUser(function(id, done) {
 // homepage
 app.get("/", function(req, res) {
     if (req.isAuthenticated()) {
+      res.sendFile(__dirname + "site.html")
     } else {
-        res.render("signIn");
+        res.redirect("/signIn");
     }
 });
 
