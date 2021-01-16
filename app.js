@@ -112,6 +112,11 @@ app.get("/", function(req, res) {
   }
 });
 
+// signin
+app.get("/signIn", function(req, res) {
+  res.render("signIn");
+})
+
 //
 // app.route("/user/:userId")
 //   .get(function(req, res) {
