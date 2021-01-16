@@ -36,6 +36,12 @@ mongoose.connect("mongodb+srv://admin-Ke:password123!@cluster0.qi4ub.mongodb.net
 }, {
     useUnifiedTopology: true
 });
+
+mongoose.connection
+    .once('open', ()=> console.log('Connected'))
+    .on('error', (error)=> {
+        console.log("Your Error: ", error);
+    });
 mongoose.set('useUnifiedTopology', true);
 mongoose.set("useCreateIndex", true);
 
