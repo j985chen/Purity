@@ -1,90 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>BLACKLIST</title>
-<style>
-
-  @font-face {
-      font-family: 'Yusei Magic', sans-serif;;
-      src: url(https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap);
-  }
-  html {
-    font-size: 26px;
-  }
-  body {
-    margin: 0 auto;
-    padding: 50px;
-    font-family: 'Yusei Magic', sans-serif;
-    line-height: 150%;
-    background-color: #222831;
-    text-align: center;
-  }
-  body:not(.ready) #textarea::placeholder,
-  body:not(.ready) #controls {
-    opacity: 0;
-  }
-  body:not(.ready) #controls {
-    visibility: hidden;
-  }
-  #textarea {
-    border: 3px solid;
-    outline: none;
-    font-size: inherit;
-    line-height: inherit;
-    background-color: #FFFFE0;
-  }
-  #textarea::placeholder {
-    color: silver;
-    opacity: 1;
-    transition: opacity .7s;
-  }
-
- #controls {
-    transition: opacity 1s;
-  }
-
-
-  #save {
-    font-size: 150%;
-    font-weight: bold;
-    margin-right: 15px;
-  }
-  #credits {
-    margin-top: 7em;
-  }
-  #credits a {
-    font-weight: bold;
-    color: black;
-    text-decoration: none;
-  }
-  #credits a:hover {
-    border-bottom: 1px solid black;
-  }
-</style>
+  <title>BLACKLIST</title>
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
 <body style="color: white;">
-
   <form action="/" method="post">
-    <h1 style="background-color: pink; color: black; text-align: center;">Block Site</h1>
+    <h1 style="background-color: pink; color: black; text-align: center; padding: 5px; ">Block Site</h1>
     <p>
-      Use our <strong>Blacklist</strong> feature to block certain websites from your child!
+        Use our <strong>Blacklist</strong> feature to block certain websites from your child!
     </p>
-    <p>
-        <h2>Instructions:</h2>
-        1. Type in URL of website you would like to block access to <br>
-        2. If there are multiple websites you would like to block access to, hit "enter" and type URL into new row <br>
-        3. Hit "Save" button <br>
-        4. Check "Enabled?" checkbox to enable website-blocking
-    </p><div style="text-align: center;">
-    <textarea id="textarea" rows="12" cols="23" spellcheck="false" ></textarea>
+    <h2>Instructions:</h2>
+    <ol>
+      <li>Type in URL of website you would like to block access to</li>
+      <li>If there are multiple websites you would like to block access to, enter each URL on a separate line </li>
+      <li>Hit "Save" to save your settings</li>
+      <li>Switch "Enabled" ON to enable website-blocking</li>
+    </ol>
+    <div style="text-align: center;">
+        <textarea id="textarea" class="form-control" rows="12" cols="23" spellcheck="false" ></textarea>
     </div>
     <br>
 
     <div id="controls">
-      <button id="save">Save</button>
-      <strong>Enabled?</strong><input id="checkbox" type="checkbox" checked="checked">
+        <button type="button" class="btn btn-success" id="save">Save</button>
+        <div class="custom-control custom-switch">
+          <input class="custom-control-input" type="checkbox" id="checkbox">
+          <label class="custom-control-label" for="checkbox">Enable</label>
+        </div>
+        <!--<input id="checkbox" type="checkbox" checked="checked"><label for="checkbox">Enable</label>-->
     </div>
-
 
     <script src="site.js"></script>
   </form>
