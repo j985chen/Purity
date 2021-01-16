@@ -16,72 +16,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
-    <!-- <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style> -->
-
-    <!-- Custom styles for this template -->
     <link href="css/styles.css" rel="stylesheet">
 </head>
 
 <body>
-  <!-- <script>
-    function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
-      console.log(response);                   // The current login status of the person.
-      if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-        testAPI();
-      }
-    }
-
-    function checkLoginState() {               // Called when a person is finished with the Login Button.
-      FB.getLoginStatus(function(response) {   // See the onlogin handler
-        statusChangeCallback(response);
-      });
-    }
-
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '2820593898267084',
-        cookie     : true,
-        xfbml      : true,
-        version    : 'v9.0'
-      });
-
-      FB.AppEvents.logPageView();
-      FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
-        statusChangeCallback(response);        // Returns the login status.
-      });
-
-      function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-        FB.api('/me', function(response) {
-          console.log('Successful login for: ' + response.name);
-        });
-      }
-    };
-
-    (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&autoLogAppEvents=1&version=v9.0&appId=2820593898267084" nonce="cNdsGud7"></script> -->
 
   <main class="form-signin">
     <form action="/signIn" method="post">
@@ -92,9 +30,8 @@
       </a>
       <div class="divider"></div>
       <a class="w-100 btn btn-lg  btn-outline-light" href="/auth/facebook" role="button" style="text-transform:none">
-       <img width="20px" style="margin-bottom:3px; margin-right:5px; mix-blend-mode: multiply;" alt="Facebook sign-in" src="/images/Facebook-logo.png" /> Login with Facebook
+       <img width="20px" style="margin-bottom:3px; margin-right:5px;" alt="Facebook sign-in" src="/images/Facebook-logo.png" /> Login with Facebook
      </a>
-       <!-- <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
     </form>
   </main>
 </body>

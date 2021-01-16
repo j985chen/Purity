@@ -9,6 +9,7 @@ body {
     padding-top: 40px;
     padding-bottom: 40px;
     background-color: #222831;
+    font-family: 'Yusei Magic', sans-serif;
 }
 
 .divider {
@@ -58,5 +59,4 @@ body {
 
 .text {
     color: #dddddd;
-    font-family: 'Yusei Magic', sans-serif;
 }
