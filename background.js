@@ -293,16 +293,16 @@ chrome.runtime.onInstalled.addListener(function(details){
     }
 });
 
+const defaultFilters = [
+	"*://*pornhub.com/*",
+]
+
 //website blocker function
 chrome.webRequest.onBeforeRequest.addListener(
 	function(details){return{ cancel: true}},
 	{urls: defaultFilters},
 	["blocking"]
 )
-
-const defaultFilters = [
-	"*://*pornhub.com/*",
-]
 
 // chrome.webRequest.onCompleted.addListener(function(details) {
 //     var url = document.createElement('a');
