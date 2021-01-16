@@ -1,0 +1,40 @@
+{
+  "name": "childproof-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kexu02/Childproof-extension.git"
+  },
+  "keywords": [
+    "childproof",
+    "extension"
+  ],
+  "author": "Ke Emma Iva Janet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kexu02/Childproof-extension/issues"
+  },
+  "homepage": "https://github.com/kexu02/Childproof-extension#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.11.12",
+    "mongoose-findorcreate": "^3.0.0",
+    "nod": "^0.2.0",
+    "node": "^15.4.0",
+    "nodemon": "^2.0.7",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.1.0",
+    "request": "^2.88.2"
+  }
+}
