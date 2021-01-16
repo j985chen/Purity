@@ -183,9 +183,6 @@ footer {
 .form-line-active input:focus,
 .form-line-active textarea:focus {
     border: 1px solid !important;
-    box-shadow: 0 0 3px #e8eae6 !important;
-    -moz-box-shadow: 0 0 3px #e8eae6 !important;
-    -webkit-box-shadow: 0 0 3px #e8eae6 !important;
 }
 
 input:focus,
