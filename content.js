@@ -22,8 +22,8 @@ var wordDates = [];
 var origin_site;
 
 
-const vision = require('@google-cloud/vision');
-const client = new vision.ImageAnnotatorClient();
+//const vision = require('@google-cloud/vision');
+//const client = new vision.ImageAnnotatorClient();
 
 var innerBody = document.querySelectorAll('*');
 
