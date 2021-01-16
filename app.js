@@ -46,17 +46,24 @@ mongoose.connection
 mongoose.set('useUnifiedTopology', true);
 mongoose.set("useCreateIndex", true);
 
+// Blacklist Schema
+const listSchema = new mongoose.Schema({
+   user:String,
+   website: String
+});
+
 // create user schema
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,
   googleId: String,
-  blacklist: [String]
+  blacklist: [listSchema]
 });
 
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
 
+const List = new mongoose.model("List", listSchema);
 const User = new mongoose.model("User", userSchema);
 
 passport.use(User.createStrategy());
@@ -106,7 +113,7 @@ app.get("/auth/google/childproof",
 // homepage
 app.get("/", function(req, res) {
   if (req.isAuthenticated()) {
-    res.sendFile(__dirname + "site.html")
+    res.redirect("/blacklist");
   } else {
     res.redirect("/signIn");
   }
@@ -117,15 +124,44 @@ app.get("/signIn", function(req, res) {
   res.render("signIn");
 })
 
-//
-// app.route("/user/:userId")
-//   .get(function(req, res) {
-//     user.findOne({
-//       username: req.params.userID
-//     }, function(err, foundUser) {
-//       res.sendFile(__dirname + "/site.html");
-//     })
-//   })
+// block list
+app.get("/blacklist", function(req, res) {
+  if (req.isAuthenticated()) {
+      List.find({ user: req.user.id }, function(err, foundItems) {
+          User.findById(req.user.id, function(err, foundUser) {
+              if (!err) {
+                  if (foundUser) {
+                      foundUser.blacklist = foundItems;
+                      foundUser.save();
+                      res.render("site", { newListItems: foundItems });
+                  }
+              }
+          });
+      });
+  } else {
+      res.redirect("/signIn");
+  }
+})
+
+app.post("/blacklist", function(req, res) {
+   const link = req.body.newWebsite;
+   const list = new List({
+        user: req.user.id,
+        website: link
+    });
+    list.save();
+    res.redirect("/blacklist");
+})
+
+  // deleting websites from list
+app.post("/delete", function(req, res) {
+      const checkedTask = req.body.checkbox;
+      List.findByIdAndRemove(checkedTask, function(err) {
+          if (!err) {
+              res.redirect("/blacklist");
+          }
+      })
+  })
 
 // connects to webpage
 app.listen(process.env.PORT || 3000, function() {
