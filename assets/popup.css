@@ -18,7 +18,7 @@ body {
     margin: auto;
 }
 
-.popup_button {
+#popup_button {
     border-radius: 5px;
     border: 0px;
     color: #FFF;
