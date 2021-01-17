@@ -2,7 +2,7 @@ var currentDate = new Date();
 var dd = currentDate.getDate();
 var mm = currentDate.getMonth()+1;
 var yy = currentDate.getFullYear();
-if(dd<10) {dd = '0'+dd} 
+if(dd<10) {dd = '0'+dd}
 if(mm<10) {mm = '0'+mm}
 currentDate = (mm)+ "/"+ dd + "/" + yy;
 chrome.runtime.onInstalled.addListener(function(details){
@@ -12,7 +12,7 @@ chrome.runtime.onInstalled.addListener(function(details){
 		filterToggle: false,
 		matchMethod: "0",
 		multipleMeaning: "0",
-		password: "null", 
+		password: "null",
 		warningDomains: [
 			"https://www.facebook.com",
 			"https://www.twitter.com",
@@ -233,11 +233,11 @@ chrome.runtime.onInstalled.addListener(function(details){
             {"substitute": "[votes]","word": "ballots","double":false},
             {"substitute": "[vote]","word": "ballot","double":false},
             {"substitute": "[discord]","word": "disagreement","double":false},
-            {"substitute": "[statehouses]","word": "government buildings","double":false}, 
+            {"substitute": "[statehouses]","word": "government buildings","double":false},
             {"substitute": "[more]","word": "additional","double":false},
             {"substitute": "[getting ready for]","word": "Bracing","double":false},
             {"substitute": "[fight]","word": "confrontation","double":false},
-            {"substitute": "[fights]","word": "confrontations","double":false}, 
+            {"substitute": "[fights]","word": "confrontations","double":false},
             {"substitute": "[disagree with]","word": "object to","double":false},
             {"substitute": "[disagree]","word": "object","double":false},
             {"substitute": "[votes]","word": "ballots","double":false},
@@ -265,7 +265,7 @@ chrome.runtime.onInstalled.addListener(function(details){
             {"substitute": "[lie]","word": "falsehood","double":false},
 		],
 		textHistory: [],
-		wordDates:[{date: currentDate, wordHist: []}]	
+		wordDates:[{date: currentDate, wordHist: []}]
 	}
 
     if(details.reason == "install"){
@@ -288,6 +288,28 @@ chrome.webRequest.onBeforeRequest.addListener(
 	["blocking"]
 )
 
+//downloading explicit images
+function downloadImages(info,tab) {
+  alert('o');
+  chrome.tabs.executeScript(tab.id,{file:"faceRec.js"});
+}
+
+chrome.contextMenus.create({
+    title: "ExampleFunction",
+    contexts:["page"],
+    onclick: downloadImages,
+  });
+
+chrome.runtime.onMessage.addListener(function(message){
+  //In case you want to do other things too this is a simple way to handle it
+  if(message.method == "downloadImages"){
+    message.images.forEach(function(v){
+      allImages.push(v);
+    });
+    alert(allImages[0]);
+  }
+});
+
 // chrome.webRequest.onCompleted.addListener(function(details) {
 //     var url = document.createElement('a');
 //     url.href = details.url;
@@ -306,10 +328,10 @@ chrome.webRequest.onBeforeRequest.addListener(
 /* global chrome, URL */
 
 chrome.runtime.onInstalled.addListener(function () { //Fired when the extension is first installed, when the extension is updated to a new version, and when Chrome is updated to a new version.
-    
+
   chrome.storage.local.get(["blocked", "enabled"], function (local) { //get blocked and enabled from local storage
     if (!Array.isArray(local.blocked)) { //if passed value (local.blocked)is not array
-      chrome.storage.local.set({ blocked: [] });//make blocked into array 
+      chrome.storage.local.set({ blocked: [] });//make blocked into array
     }
 
     if (typeof local.enabled !== "boolean") { //if enabled is not a boolean
@@ -318,12 +340,12 @@ chrome.runtime.onInstalled.addListener(function () { //Fired when the extension 
   });
 });
 
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) { //fired when tab is updated 
-  const url = changeInfo.pendingUrl || changeInfo.url; 
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) { //fired when tab is updated
+  const url = changeInfo.pendingUrl || changeInfo.url;
   if (!url || !url.startsWith("http")) {
     return;
-  } 
- 
+  }
+
   const hostname = new URL(url).hostname;
 
   chrome.storage.local.get(["blocked", "enabled"], function (local) {
@@ -336,8 +358,8 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) { //fired when ta
 
 
 chrome.contextMenus.create({
-	title: "ExampleFunction", 
-	contexts:["page"], 
+	title: "ExampleFunction",
+	contexts:["page"],
 	onclick: downloadImages,
   });
 
@@ -345,7 +367,7 @@ chrome.contextMenus.create({
 	alert('o');
 	chrome.tabs.executeScript(tab.id,{file:"faceRec.js"});
   }
-  
+
   chrome.runtime.onMessage.addListener(function(message){
 	//In case you want to do other things too this is a simple way to handle it
 	if(message.method == "downloadImages"){
