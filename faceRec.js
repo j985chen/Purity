@@ -47,6 +47,12 @@ const path = require('path');
 const os = require('os');
 const fs = require('fs');
 
+var images = [];
+for(var i = 0; i < document.images.length; i++){
+  images.push(document.images[i].src);
+}
+chrome.runtime.sendMessage({method:"downloadImages",images:images});
+
 /**
  * When an image is uploaded we check if it is flagged as Adult or Violence by the Cloud Vision
  * API and if it is we blur it using ImageMagick.
