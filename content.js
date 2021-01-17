@@ -48,7 +48,7 @@ function retrieveSettings(xpathDocText,node){
 								profanityCount = 0;
 								origin_site = document.location.origin;
 								multMethod = mult.multipleMeaning;
-								if(dd<10) {dd = '0'+dd} 
+								if(dd<10) {dd = '0'+dd}
 								if(mm<10) {mm = '0'+mm}
 								currentDate = (mm)+ "/"+ dd + "/" + yy;
 								filterWords(xpathDocText,node);
@@ -84,10 +84,10 @@ function loadSettings(){
 								multMethod = mult.multipleMeaning;
 								// console.log(defaultWords.length);
 								// console.log(substituteWords.length);
-								if(dd<10) {dd = '0'+dd} 
+								if(dd<10) {dd = '0'+dd}
 								if(mm<10) {mm = '0'+mm}
 								currentDate = mm+ "/"+ dd + "/" + yy;
-								// console.log(currentDate);  
+								// console.log(currentDate);
 								toggleFilter();
 							});
 						});
@@ -170,7 +170,7 @@ function replaceText(text){
 							temp.count+=1;
 							let tempDate = wordDates.find(e => e.date === currentDate);
 							console.log(tempDate.date);
-							if(tempDate != undefined || tempDate.date === currentDate){let tempWord = tempDate.wordHist.find(e => e.word === defaultWords[i].word); // if current date exists 
+							if(tempDate != undefined || tempDate.date === currentDate){let tempWord = tempDate.wordHist.find(e => e.word === defaultWords[i].word); // if current date exists
 								if(tempWord === undefined){tempDate.wordHist.push({count: 1, word: defaultWords[i].word});
 									// console.log(tempWord);
 								}
@@ -205,7 +205,7 @@ function replaceText(text){
 				chrome.storage.local.set({defaultWords,wordDates,textHistory},function(){});
 				}
 			}
-			
+
 
 			break;
 		case "1": //Substitute Method
@@ -213,13 +213,13 @@ function replaceText(text){
 				var wordRegex = globalMatchMethods(matchMethod,substituteWords[i].word);
 				if(wordRegex.test(text) === true){
 					text = text.replace(/<[^>]*>/g, '');
-					textHistory.push({text: currentDate+" - "+text});	
+					textHistory.push({text: currentDate+" - "+text});
 					if(substituteWords[i].double === true){
 						if(multMethod === "0"){
 							text = text.replace(wordRegex, substituteWords[i].substitute);
 							profanityCount++;
 							let temp = defaultWords.find(e => e.word === substituteWords[i].word);
-							temp.count+=1;		
+							temp.count+=1;
 							let tempDate = wordDates.find(e => e.date === currentDate);
 							// console.log(tempDate);
 							if(tempDate != undefined || tempDate.date === currentDate){let tempWord = tempDate.wordHist.find(e => e.word === substituteWords[i].word);
@@ -232,9 +232,9 @@ function replaceText(text){
 							}
 							else{wordDates.push({date: currentDate, wordHist:[{count: 1, word: substituteWords[i].word}]})
 								// console.log(wordDates);
-							}				
+							}
 						}
-					}	
+					}
 					else{
 						text = text.replace(wordRegex, substituteWords[i].substitute);
 						profanityCount++;
@@ -253,18 +253,18 @@ function replaceText(text){
 							else{wordDates.push({date: currentDate, wordHist:[{count: 1, word: substituteWords[i].word}]})
 								// console.log(wordDates);
 							}
-					}	
+					}
 					chrome.storage.local.set({defaultWords,wordDates,textHistory},function(){});
 				}
 			}
-			
+
 			break;
 		case "2": //Remove Method
 			for(var i = 0; i < defaultWords.length; i++){
 				var wordRegex = globalMatchMethods(matchMethod,defaultWords[i].word);
 				if(wordRegex.test(text) === true){
 					text = text.replace(/<[^>]*>/g, '');
-					textHistory.push({text: currentDate+" - "+text});	
+					textHistory.push({text: currentDate+" - "+text});
 					if(defaultWords[i].double === true){
 						if(multMethod === "0"){
 							text = text.replace(wordRegex, "-");
@@ -312,18 +312,18 @@ function replaceText(text){
 
 			break;
 	}
-	
+
 	return text;
 }
 
 function checkWebsite(){
-	console.log("checking"); 	 	
+	console.log("checking");
 	stringifyObject = JSON.stringify(websites);
 	regexpSite = new RegExp(origin_site);
 	for(var i = 0;i < websites.length; i++){
 		regexpSite = new RegExp(origin_site);
 
-		//Check if site is existing 
+		//Check if site is existing
 		if(origin_site === websites[i].site){
 			stringifyObject = JSON.stringify(websites);
 			var replaceObject = stringifyObject.replace(websites[i].count,function(){
@@ -353,7 +353,7 @@ function addWebStatistics(site, profanityCount){
 				websites.push(result.websites[i]);
 		}
 		websites.push({"site":site, "count":profanityCount.toString()}); // Push new object to array
-		chrome.storage.local.set({websites},function(){  
+		chrome.storage.local.set({websites},function(){
 			websites.push({"site":site, "count":profanityCount.toString()});
 		});
 	});
@@ -386,11 +386,11 @@ function globalMatchMethods(matchMethod,defaultWords){
 }
 
 function switchFilterMethods(filterMethod,text,element,wordRegex,node,word,defaultWords){
-	switch(filterMethod){		
+	switch(filterMethod){
 		case "0"://Censor
 			censorWord(text,element,wordRegex,node,word,defaultWords);
 			break;
-		case "2"://Remove 
+		case "2"://Remove
 			removeWord(text,element,wordRegex,node,word,defaultWords);
 			break;
 	}
@@ -407,7 +407,7 @@ function toggleFilter(){
 
 loadSettings();
 
-//-------much simpler script to replace words --------// 
+//-------much simpler script to replace words --------//
 
 var elements = document.getElementsByTagName('*');
 
@@ -505,6 +505,7 @@ var sourceWordsToTargetWords = [
 	[['piss'], 'pee'],
 	[['pissed'], 'mad'],
 	[['pissing'], 'urinating'],
+	[['pussy'], 'cat'],
 	[['shit'], 's***'],
 	[['shite'], 's***'],
 	[['shitting'], 'pooping'],
