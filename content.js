@@ -9,6 +9,8 @@ var settings = {
 //-------much simpler script to replace words --------// 
 
 var elements = document.getElementsByTagName('*');
+//document interface that returns HTMLCollection of elements with given tag name 
+// * represents all elements 
 
 var sourceWordsToTargetWords = [
 	[['anal'], 'butt'],
@@ -88,7 +90,7 @@ var sourceWordsToTargetWords = [
 	[['dumshit'], 'dummy'],
 	[['fag'], 'loser'],
 	[['faggot'], 'loser'],
-	[['fagfucker'], 'boyfriend'],
+	[['fagfucker'], 'frick'],
 	[['fuck'], 'frick'],
 	[['fuckable'], 'frickable'],
 	[['fucking'], 'freaking'],
@@ -145,24 +147,26 @@ var sourceWordsToTargetWords = [
 	[['falsehood'], 'lie'],
 	[['integrity'], 'quality'],
 	[['law enforcement'], 'police'],
+	[['pussy'], 'cat'],
+	
 
-];
+]; //search for these words 
 
 function makeRegex(sourceWords) {
     return new RegExp('\\b' + sourceWords.join('\\b|\\b') + '\\b', 'g');
-};
+}; //RegExp is used for finding patterns 
 
 function identity(string) {
     return string;
-};
+}; //returns input unchanged 
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-};
+}; //returns string with first letter capitalized 
 
 function toUpperCase(string) {
     return string.toUpperCase();
-};
+}; //returns all caps version of string
 
 function makeRegexToTargetWords(sourceWordsToTargetWords, modifyWords) {
     return sourceWordsToTargetWords.map(function(sourceAndTarget) {

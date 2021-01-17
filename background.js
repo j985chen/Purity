@@ -277,7 +277,7 @@ chrome.runtime.onInstalled.addListener(function(details){
 
 //add list of blacklist websites
 const defaultFilters = [
-	"*://*.pornhub.com/*",
+    "*://*.pornhub.com/*",
 ]
 
 //website blocker function
