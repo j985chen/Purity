@@ -57,8 +57,7 @@ const listSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,
-  googleId: String,
-  facebookId: String,
+  accId: String,
   blacklist: [listSchema]
 });
 
@@ -89,7 +88,7 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     User.findOrCreate({
-      googleId: profile.id,
+      accId: profile.id,
       username: profile.emails[0].value
     }, function(err, user) {
       return done(err, user);
@@ -117,31 +116,30 @@ passport.use(new FacebookStrategy({
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
         callbackURL: "http://www.childproof.herokuapp.com/auth/facebook/childproof",
-        profileFields: ['id', 'displayName', 'photos', 'email']
+        profileFields: ['id', 'email', 'first_name', 'last_name']
       },
       function(accessToken, refreshToken, profile, done) {
         User.findOrCreate({
-            facebookId: profile.id,
-            username: profile.displayName
+            accId: profile.id,
+            userName: profile.name.familyName + ' ' + profile.name.givenName
           }, function(err, user) {
               return done(err, user);
             });
           }
-        ));
+  ));
 
     app.get('/auth/facebook', passport.authenticate('facebook', {
-      scope: ["read_stream", "profile"]
+      scope: ['public_profile', 'email']
     })
   );
 
-    app.get('/auth/facebook/childproof',
-      passport.authenticate('facebook', {
-        failureRedirect: "/loginIn"
-      }),
-      function(req, res) {
-        res.redirect("/");
-      }
-    );
+  app.get("/auth/facebook/childproof",
+    passport.authenticate('facebook', {
+      failureRedirect: "/signIn"
+    }),
+    function(req, res) {
+      res.redirect("/");
+    });
 
     // homepage
     app.get("/", function(req, res) {
