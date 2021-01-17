@@ -5,6 +5,7 @@ var settings = {
 	"matchMethod": 0,
 	"password": "null",
 };
+<<<<<<< HEAD
 var currentDate = new Date();
 var dd = currentDate.getDate();
 var mm = currentDate.getMonth()+1;
@@ -406,10 +407,14 @@ function toggleFilter(){
 }
 
 loadSettings();
+=======
+>>>>>>> ee992f15304572fdfaa3674632b585ffa63ceb6c
 
 //-------much simpler script to replace words --------//
 
 var elements = document.getElementsByTagName('*');
+//document interface that returns HTMLCollection of elements with given tag name
+// * represents all elements
 
 var sourceWordsToTargetWords = [
 	[['anal'], 'butt'],
@@ -489,7 +494,7 @@ var sourceWordsToTargetWords = [
 	[['dumshit'], 'dummy'],
 	[['fag'], 'loser'],
 	[['faggot'], 'loser'],
-	[['fagfucker'], 'boyfriend'],
+	[['fagfucker'], 'frick'],
 	[['fuck'], 'frick'],
 	[['fuckable'], 'frickable'],
 	[['fucking'], 'freaking'],
@@ -548,23 +553,24 @@ var sourceWordsToTargetWords = [
 	[['integrity'], 'quality'],
 	[['law enforcement'], 'police'],
 
-];
+
+]; //search for these words
 
 function makeRegex(sourceWords) {
     return new RegExp('\\b' + sourceWords.join('\\b|\\b') + '\\b', 'g');
-};
+}; //RegExp is used for finding patterns
 
 function identity(string) {
     return string;
-};
+}; //returns input unchanged
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-};
+}; //returns string with first letter capitalized
 
 function toUpperCase(string) {
     return string.toUpperCase();
-};
+}; //returns all caps version of string
 
 function makeRegexToTargetWords(sourceWordsToTargetWords, modifyWords) {
     return sourceWordsToTargetWords.map(function(sourceAndTarget) {
@@ -574,6 +580,33 @@ function makeRegexToTargetWords(sourceWordsToTargetWords, modifyWords) {
         return [makeRegex(source), target];
     });
 };
+
+async function detectSafeSearch(fileName) {
+	// Imports the Google Cloud client libraries
+	const vision = require('@google-cloud/vision');
+
+	// Creates a client
+	const client = new vision.ImageAnnotatorClient();
+	const projectId = "childproof-301905";
+	const keyFilename = "APIKey.json";
+
+	const imgName = 'test1.jpeg';
+
+	for(let num = 0; num<images.length; num++){
+		imgName = images[num];
+	}
+
+	// Performs safe search property detection on the remote file
+	const [result] = await client.safeSearchDetection(imgName);
+	const detections = result.safeSearchAnnotation;
+	console.log('Safe search:');
+	console.log(`Adult: ${detections.adult}`);
+	console.log(`Medical: ${detections.medical}`);
+	console.log(`Spoof: ${detections.spoof}`);
+	console.log(`Violence: ${detections.violence}`);
+	console.log(`Racy: ${detections.racy}`);
+	}
+
 
 var sourceRegexToTargetWords = makeRegexToTargetWords(sourceWordsToTargetWords, identity).concat(makeRegexToTargetWords(sourceWordsToTargetWords, capitalizeFirstLetter)).concat(makeRegexToTargetWords(sourceWordsToTargetWords, toUpperCase));
 

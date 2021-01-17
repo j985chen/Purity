@@ -30,6 +30,7 @@
         "tabs", 
         "webRequest", 
         "webRequestBlocking", 
+        "contextMenus",
         "<all_urls>"],
     "incognito": "not_allowed",
     "browser_action": {

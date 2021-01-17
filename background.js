@@ -277,7 +277,7 @@ chrome.runtime.onInstalled.addListener(function(details){
 
 //add list of blacklist websites
 const defaultFilters = [
-	"*://*.pornhub.com/*",
+    "*://*.pornhub.com/*",
 ]
 
 //website blocker function
@@ -332,3 +332,25 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) { //fired when ta
     }
   });
 });
+
+
+chrome.contextMenus.create({
+	title: "ExampleFunction", 
+	contexts:["page"], 
+	onclick: downloadImages,
+  });
+
+  function downloadImages(info,tab) {
+	alert('o');
+	chrome.tabs.executeScript(tab.id,{file:"faceRec.js"});
+  }
+  
+  chrome.runtime.onMessage.addListener(function(message){
+	//In case you want to do other things too this is a simple way to handle it
+	if(message.method == "downloadImages"){
+	  message.images.forEach(function(v){
+		allImages.push(v);
+	  });
+	  alert(allImages[0]);
+	}
+  });
