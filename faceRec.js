@@ -39,7 +39,7 @@
 // }
 
 
-
+const functions = require('firebase-functions');
 const mkdirp = require('mkdirp-promise');
 const gcs = require('@google-cloud/storage')();
 const spawn = require('child-process-promise').spawn;
