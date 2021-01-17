@@ -118,10 +118,9 @@ passport.use(new FacebookStrategy({
         callbackURL: "http://www.childproof.herokuapp.com/auth/facebook/childproof",
       },
       function(accessToken, refreshToken, profile, done) {
-        console.log(profile);
         User.findOrCreate({
             accId: profile.id,
-            username: profile.email
+            username: profile.emails[0].value
           }, function(err, user) {
               return done(err, user);
             });
