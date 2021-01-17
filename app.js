@@ -130,7 +130,7 @@ passport.use(new FacebookStrategy({
         ));
 
     app.get('/auth/facebook', passport.authenticate('facebook', {
-      scope: ["public_profile", "email"]
+      scope: "email"
     })
   );
 
