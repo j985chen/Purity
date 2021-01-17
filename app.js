@@ -132,14 +132,13 @@ passport.use(new FacebookStrategy({
     })
   );
 
-    app.get('/auth/facebook/childproof',
-      passport.authenticate('facebook', {
-        failureRedirect: "/loginIn"
-      }),
-      function(req, res) {
-        res.redirect("/");
-      }
-    );
+  app.get("/auth/facebook/childproof",
+    passport.authenticate('facebook', {
+      failureRedirect: "/signIn"
+    }),
+    function(req, res) {
+      res.redirect("/");
+    });
 
     // homepage
     app.get("/", function(req, res) {
