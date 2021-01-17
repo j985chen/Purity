@@ -5,7 +5,7 @@ var settings = {
 	"matchMethod": 0,
 	"password": "null",
 };
-<<<<<<< HEAD
+
 var currentDate = new Date();
 var dd = currentDate.getDate();
 var mm = currentDate.getMonth()+1;
