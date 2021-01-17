@@ -57,8 +57,7 @@ const listSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,
-  googleId: String,
-  facebookId: String,
+  accId: String,
   blacklist: [listSchema]
 });
 
@@ -89,7 +88,7 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     User.findOrCreate({
-      googleId: profile.id,
+      accId: profile.id,
       username: profile.emails[0].value
     }, function(err, user) {
       return done(err, user);
@@ -117,11 +116,11 @@ passport.use(new FacebookStrategy({
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
         callbackURL: "http://www.childproof.herokuapp.com/auth/facebook/childproof",
-        profileFields: ['id', 'email']
       },
       function(accessToken, refreshToken, profile, done) {
+        console.log(profile);
         User.findOrCreate({
-            facebookId: profile.id,
+            accId: profile.id,
             username: profile.email
           }, function(err, user) {
               return done(err, user);
@@ -130,7 +129,7 @@ passport.use(new FacebookStrategy({
         ));
 
     app.get('/auth/facebook', passport.authenticate('facebook', {
-      scope: "email"
+      scope: ['public_profile', 'email']
     })
   );
 
